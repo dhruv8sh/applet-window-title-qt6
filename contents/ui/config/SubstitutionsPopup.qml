@@ -1,28 +1,7 @@
-/*
-*  Copyright 2018 Michail Vourlakos <mvourlakos@gmail.com>
-*
-*  This file is part of applet-window-title
-*
-*  Latte-Dock is free software; you can redistribute it and/or
-*  modify it under the terms of the GNU General Public License as
-*  published by the Free Software Foundation; either version 2 of
-*  the License, or (at your option) any later version.
-*
-*  Latte-Dock is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-import QtQuick 2.9
-import QtQuick.Controls 1.0
-import QtQuick.Controls 2.2 as Controls22
-import QtQuick.Layouts 1.0
-
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 import "../../tools/Tools.js" as Tools
 
@@ -45,9 +24,9 @@ SlidingBox {
     contentItem: ColumnLayout{
         id: mainColumn
         width: popup.availableWidth
-        anchors.margins: units.largeSpacing
+        anchors.margins: Kirigami.Units.largeSpacing
         anchors.centerIn: parent
-        spacing: units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing
 
         Label{
             Layout.fillWidth: true
@@ -79,8 +58,8 @@ SlidingBox {
 
                 onTextChanged: page.selectedMatches = popup.textAreaToList(text)
 
-                flickableItem.onContentYChanged: {
-                  textAreaReplace.flickableItem.contentY = flickableItem.contentY
+                Flickable {
+                  onContentYChanged: textAreaReplace.flickableItem.contentY = flickableItem.contentY
                 }
             }
             TextArea{
@@ -91,8 +70,8 @@ SlidingBox {
                 text: listToText(page.selectedReplacements)
                 onTextChanged: page.selectedReplacements = popup.textAreaToList(text)
 
-                flickableItem.onContentYChanged: {
-                  textAreaMatch.flickableItem.contentY = flickableItem.contentY
+                Flickable {
+                  onContentYChanged: textAreaMatch.flickableItem.contentY = flickableItem.contentY
                 }
             }
         }

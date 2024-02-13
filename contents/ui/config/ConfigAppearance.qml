@@ -1,29 +1,9 @@
-/*
-*  Copyright 2018 Michail Vourlakos <mvourlakos@gmail.com>
-*
-*  This file is part of applet-window-title
-*
-*  Latte-Dock is free software; you can redistribute it and/or
-*  modify it under the terms of the GNU General Public License as
-*  published by the Free Software Foundation; either version 2 of
-*  the License, or (at your option) any later version.
-*
-*  Latte-Dock is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-import QtQuick 2.9
-import QtQuick.Controls 1.0
-import QtQuick.Controls 2.2 as Controls22
-import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.0
-
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.components as Components
 
 import "../../tools/Tools.js" as Tools
 
@@ -59,7 +39,7 @@ Item {
     readonly property int minimumWidth: 220
 
     onSelectedStyleChanged: {
-        if (selectedStyle === 4) { /*NoText*/
+        if (selectedStyle === 4) { /*NoLabel*/
             showIconChk.checked = true;
         }
     }
@@ -70,7 +50,7 @@ Item {
 
     ColumnLayout {
         id:mainColumn
-        spacing: units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing
         Layout.fillWidth: true
 
         GridLayout{
@@ -78,8 +58,8 @@ Item {
 
             Label{
                 Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
-                text: i18n("Text style:")
-                horizontalAlignment: Text.AlignRight
+                text: i18n("Label style:")
+                horizontalAlignment: Label.AlignRight
             }
 
             CustomComboBox{
@@ -104,13 +84,13 @@ Item {
             Label{
                 Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                 text: i18n("Icon:")
-                horizontalAlignment: Text.AlignRight
+                horizontalAlignment: Label.AlignRight
             }
 
             CheckBox{
                 id: showIconChk
                 text: i18n("Show when available")
-                enabled: root.selectedStyle !== 4 /*NoText*/
+                enabled: root.selectedStyle !== 4 /*NoLabel*/
             }
 
             Label{
@@ -130,14 +110,14 @@ Item {
 
                 SpinBox{
                     id: iconSizeSpn
-                    minimumValue: 16
-                    maximumValue: 128
-                    suffix: " " + i18nc("pixels","px.")
+                    from: 16
+                    to: 128
+                    // suffix: " " + i18nc("pixels","px.")
                     enabled: !iconFillChk.checked
                 }
 
                 Label {
-                    Layout.leftMargin: units.smallSpacing
+                    Layout.leftMargin: Kirigami.Units.smallSpacing
                     text: "maximum"
                 }
             }
@@ -145,12 +125,12 @@ Item {
 
         GridLayout{
             columns: 2
-            enabled : root.selectedStyle !== 4 /*NoText*/
+            enabled : root.selectedStyle !== 4 /*NoLabel*/
 
             Label{
                 Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                 text: i18n("Font:")
-                horizontalAlignment: Text.AlignRight
+                horizontalAlignment: Label.AlignRight
             }
 
             CheckBox{
@@ -179,13 +159,13 @@ Item {
 
         GridLayout{
             columns: 2
-            enabled : root.selectedStyle !== 4 /*NoText*/
+            enabled : root.selectedStyle !== 4 /*NoLabel*/
 
             Label{
                 id: lengthLbl2
                 Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                 text: i18n("Length:")
-                horizontalAlignment: Text.AlignRight
+                horizontalAlignment: Label.AlignRight
             }
 
             CustomComboBox{
@@ -215,8 +195,8 @@ Item {
                     Layout.preferredWidth: Layout.minimumWidth
                     Layout.maximumWidth: Layout.minimumWidth
 
-                    minimumValue: 24
-                    maximumValue: 1500
+                    from: 24
+                    to: 1500
                     stepSize: 2
                 }
                 Label {
@@ -237,8 +217,8 @@ Item {
                     Layout.preferredWidth: Layout.minimumWidth
                     Layout.maximumWidth: Layout.minimumWidth
 
-                    minimumValue: 24
-                    maximumValue: 1500
+                    from: 24
+                    to: 1500
                     stepSize: 2
                 }
                 Label {
@@ -257,7 +237,7 @@ Item {
                 Layout.maximumWidth: Layout.preferredWidth
 
                 font.italic: true
-                wrapMode: Text.WordWrap
+                wrapMode: Label.WordWrap
 
                 text: {
                     if (lengthCmb.currentIndex === 0 /*Contents*/){
@@ -277,19 +257,19 @@ Item {
             GridLayout{
                 id: visualSettingsGroup1
                 columns: 2
-                enabled: showIconChk.checked && root.selectedStyle !== 4 /*NoText*/
+                enabled: showIconChk.checked && root.selectedStyle !== 4 /*NoLabel*/
 
                 Label{
                     Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                     text: i18n("Spacing:")
-                    horizontalAlignment: Text.AlignRight
+                    horizontalAlignment: Label.AlignRight
                 }
 
                 SpinBox{
                     id: spacingSpn
-                    minimumValue: 0
-                    maximumValue: 36
-                    suffix: " " + i18nc("pixels","px.")
+                    from: 0
+                    to: 36
+                    // suffix: " " + i18nc("pixels","px.")
                 }
             }
 
@@ -309,23 +289,23 @@ Item {
                     Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                     text: plasmoid.configuration.formFactor===PlasmaCore.Types.Horizontal ?
                               i18n("Left margin:") : i18n("Top margin:")
-                    horizontalAlignment: Text.AlignRight
+                    horizontalAlignment: Label.AlignRight
                 }
 
                 Label{
                     Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
                     text: plasmoid.configuration.formFactor===PlasmaCore.Types.Horizontal ?
                               i18n("Right margin:") : i18n("Bottom margin:")
-                    horizontalAlignment: Text.AlignRight
+                    horizontalAlignment: Label.AlignRight
 
                     enabled: !lockItem.locked
                 }
 
                 SpinBox{
                     id: lengthFirstSpn
-                    minimumValue: 0
-                    maximumValue: 24
-                    suffix: " " + i18nc("pixels","px.")
+                    from: 0
+                    to: 24
+                    // suffix: " " + i18nc("pixels","px.")
 
                     property int lastValue: -1
 
@@ -344,9 +324,9 @@ Item {
 
                 SpinBox{
                     id: lengthLastSpn
-                    minimumValue: 0
-                    maximumValue: 24
-                    suffix: " " + i18nc("pixels","px.")
+                    from: 0
+                    to: 24
+                    // suffix: " " + i18nc("pixels","px.")
                     enabled: !lockItem.locked
                 }
 

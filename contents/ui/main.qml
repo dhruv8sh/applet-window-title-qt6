@@ -1,36 +1,18 @@
-/*
-*  Copyright 2018-2019 Michail Vourlakos <mvourlakos@gmail.com>
-*
-*  This file is part of applet-window-title
-*
-*  Latte-Dock is free software; you can redistribute it and/or
-*  modify it under the terms of the GNU General Public License as
-*  published by the Free Software Foundation; either version 2 of
-*  the License, or (at your option) any later version.
-*
-*  Latte-Dock is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
-import QtQuick 2.7
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.4
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.taskmanager as TaskManager
+import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.taskmanager 0.1 as TaskManager
-
-import org.kde.activities 0.1 as Activities
+import org.kde.activities as Activities
 
 import "../tools/Tools.js" as Tools
 
-Item {
+PlasmoidItem {
     id: root
     clip: true
 
@@ -47,7 +29,7 @@ Item {
     Layout.preferredHeight: plasmoid.formFactor === PlasmaCore.Types.Vertical ? preferredLength : -1
     Layout.maximumHeight: plasmoid.formFactor === PlasmaCore.Types.Vertical ? maximumLength : -1
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
     Plasmoid.onFormFactorChanged: plasmoid.configuration.formFactor = plasmoid.formFactor;
 
     Plasmoid.status: {
@@ -64,7 +46,7 @@ Item {
     readonly property bool inMaximumLengthMode:  plasmoid.configuration.lengthPolicy === 2 /*Maximum Length Policy*/
     readonly property bool inFillLengthMode: plasmoid.configuration.lengthPolicy === 3 /*Fill Length Policy*/
 
-    readonly property bool inEditMode: plasmoid.userConfiguring || latteInEditMode
+    readonly property bool inEditMode: plasmoid.userConfiguring
 
     readonly property int containmentType: plasmoid.configuration.containmentType
     readonly property int thickness: plasmoid.formFactor === PlasmaCore.Types.Horizontal ? root.height : root.width
@@ -174,27 +156,8 @@ Item {
         return "";
     }
 
-    //BEGIN Latte Dock Communicator
-    property bool isInLatte: false  // deprecated Latte v0.8 API
-    property QtObject latteBridge: null // current Latte v0.9 API
-
-    onLatteBridgeChanged: {
-        if (latteBridge) {
-            plasmoid.configuration.containmentType = 2; /*Latte containment with new API*/
-            latteBridge.actions.setProperty(plasmoid.id, "latteSideColoringEnabled", false);
-            latteBridge.actions.setProperty(plasmoid.id, "windowsTrackingEnabled", true);
-        }
-    }
-
-    //END  Latte Dock Communicator
-    //BEGIN Latte based properties
-    readonly property bool enforceLattePalette: latteBridge && latteBridge.applyPalette && latteBridge.palette
-    readonly property bool latteInEditMode: latteBridge && latteBridge.inEditMode
-    //END Latte based properties
-
     Component.onCompleted: {
         plasmoid.configuration.appMenuIsPresent = false;
-        containmentIdentifierTimer.start();
     }
 
     // START Tasks logic
@@ -215,16 +178,7 @@ Item {
 
     Loader {
         id: windowInfoLoader
-        sourceComponent: latteBridge
-                         && latteBridge.windowsTracker
-                         && latteBridge.windowsTracker.currentScreen.lastActiveWindow
-                         && latteBridge.windowsTracker.allScreens.lastActiveWindow ? latteTrackerComponent : plasmaTasksModel
-
-        Component{
-            id: latteTrackerComponent
-            LatteWindowsTracker{}
-        }
-
+        sourceComponent: plasmaTasksModel
         Component{
             id: plasmaTasksModel
             PlasmaTasksModel{}
@@ -311,11 +265,11 @@ Item {
         }
 
         mainItem: RowLayout {
-            spacing: units.largeSpacing
-            Layout.margins: units.smallSpacing
-            PlasmaCore.IconItem {
-                Layout.minimumWidth: units.iconSizes.medium
-                Layout.minimumHeight: units.iconSizes.medium
+            spacing: Kirigami.Units.largeSpacing
+            Layout.margins: Kirigami.Units.smallSpacing
+            Kirigami.Icon {
+                Layout.minimumWidth: 32 //Kirigami.Units.iconSizes.mediumSpacing ( 32 is temporary fix to get rid of warning )
+                Layout.minimumHeight: 32 //Kirigami.Units.iconSizes.mediumSpacing ( above line same )
                 Layout.maximumWidth: Layout.minimumWidth
                 Layout.maximumHeight: Layout.minimumHeight
                 source:  existsWindowActive ? activeTaskItem.icon : fullActivityInfo.icon
@@ -341,7 +295,7 @@ Item {
     Loader {
         id: actionsLoader
         anchors.fill: inFillLengthMode ? parent : visibleContents
-        active: containmentType === 1 /*plasma or old latte containment*/
+        active: containmentType === 1
 
         sourceComponent: ActionsMouseArea {
             anchors.fill: parent
@@ -351,22 +305,5 @@ Item {
     Broadcaster{
         id: broadcaster
         anchors.fill: parent
-    }
-
-    //! this timer is used in order to identify in which containment the applet is in
-    //! it should be called only the first time an applet is created and loaded because
-    //! afterwards the applet has no way to move between different processes such
-    //! as Plasma and Latte
-    Timer{
-        id: containmentIdentifierTimer
-        interval: 5000
-        onTriggered: {
-            if (latteBridge) {
-                plasmoid.configuration.containmentType = 2; /*Latte containment with new API*/
-                latteBridge.actions.broadcastToApplet("org.kde.windowappmenu", "isPresent", true);
-            } else {
-                plasmoid.configuration.containmentType = 1; /*Plasma containment or Latte with old API*/
-            }
-        }
     }
 }

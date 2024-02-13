@@ -1,26 +1,7 @@
-/*
-*  Copyright 2019 Michail Vourlakos <mvourlakos@gmail.com>
-*
-*  This file is part of applet-window-title
-*
-*  Latte-Dock is free software; you can redistribute it and/or
-*  modify it under the terms of the GNU General Public License as
-*  published by the Free Software Foundation; either version 2 of
-*  the License, or (at your option) any later version.
-*
-*  Latte-Dock is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+import QtQuick
 
-import QtQuick 2.7
-
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 
 Item{
     id: broadcaster
@@ -72,78 +53,17 @@ Item{
                 cooperation: plasmoid.configuration.sendActivateAppMenuCooperationFromEditMode
             };
 
-            latteBridge.actions.broadcastToApplet("org.kde.windowappmenu",
-                                                  "activateAppMenuCooperationFromEditMode",
-                                                  values);
-
             releaseSendActivateAppMenuCooperation.start();
         }
     }
 
     function broadcoastCooperationRequest(enabled) {
-        if (latteBridge) {
-            var values = {
-                appletId: plasmoid.id,
-                cooperation: enabled
-            };
-            latteBridge.actions.broadcastToApplet("org.kde.windowappmenu", "setCooperation", values);
-        }
-    }
-
-    Connections {
-        target: latteBridge
-        onBroadcasted: {
-            var updateAppMenuCooperations = false;
-
-            if (broadcaster.cooperationEstablished) {
-                if (action === "setVisible") {
-                    if (value === true) {
-                        broadcaster.hiddenFromBroadcast = false;
-                    } else {
-                        broadcaster.hiddenFromBroadcast = true;
-                    }
-                } else if (action === "menuIsPresent") {
-                    broadcaster.menuIsPresent = value;
-                }
-            }
-
-            if (action === "isPresent") {
-                plasmoid.configuration.appMenuIsPresent = value;
-            } else if (action === "setCooperation") {
-                updateAppMenuCooperations = true;
-            } else if (action === "activateWindowTitleCooperationFromEditMode") {
-                plasmoid.configuration.showAppMenuOnMouseEnter = value.cooperation;
-                updateAppMenuCooperations = true;
-            }
-
-            if (updateAppMenuCooperations) {
-                var indexed = broadcaster.appMenusRequestCooperation.indexOf(value.appletId);
-                var isFiled = (indexed >= 0);
-
-                if (value.cooperation && !isFiled) {
-                    broadcaster.appMenusRequestCooperation.push(value.appletId);
-                    broadcaster.appMenusRequestCooperationCount++;
-                } else if (!value.cooperation && isFiled) {
-                    broadcaster.appMenusRequestCooperation.splice(indexed, 1);
-                    broadcaster.appMenusRequestCooperationCount--;
-                }
-            }
-        }
     }
 
     Timer{
         id: broadcasterDelayer
         interval: 5
         onTriggered: {
-            if (latteBridge) {
-                if (broadcasterMouseArea.realContainsMouse && existsWindowActive) {
-                    broadcaster.hiddenFromBroadcast = true;
-                    latteBridge.actions.broadcastToApplet("org.kde.windowappmenu", "setVisible", true);
-                } else {
-                    broadcaster.hiddenFromBroadcast = false;
-                    latteBridge.actions.broadcastToApplet("org.kde.windowappmenu", "setVisible", false);
-                }
-            }
         }
     }
 
