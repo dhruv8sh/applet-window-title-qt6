@@ -1,30 +1,39 @@
 # Window Title Applet
+A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/applet-window-title/) for Latte Dock by the legendary [Psifidotos](https://github.com/psifidotos).
+> ### Requires Plasma 6
 
-This is a Plasma 5 applet that shows the current window title and icon in your panels. This plasmoid is coming from [Latte land](https://phabricator.kde.org/source/latte-dock/repository/master/) but it can also support Plasma panels.
 
-<p align="center">
-<img src="https://i.imgur.com/Zdjshmt.png" width="580"><br/>
-<i>Window Title left to Plasma 5 global menu</i>
+## Images
+<div align="center">
+<p>
+  
+![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/e5b1aa5b-b74b-490a-a9f3-2e55ea8030be)<br/>
+<i>Plasmoid on a normal Plasma Panel</i>
+<br/><br/>
 </p>
 
-<p align="center">
-<img src="https://imgur.com/ZOlnDvv.png" width="580"><br/>
+<p>
+  
+![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/ddff846f-5cb3-4324-8775-148c421c10ab)<br/>
+<i>Plasmoid on a floating Plasma Panel</i>
+<br/><br/>
+</p>
+
+<p>
+  
+![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/f8c7855e-4da9-4dea-8748-abcaecdcbfb9)<br/>
 <i>Appearance Settings</i>
+<br/><br/>
 </p>
 
-<p align="center">
-<img src="https://imgur.com/Y2L7AZj.png" width="580"><br/>
-<i>Behavior Settings</i>
+<p>
+
+![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/eecbb542-587c-41e8-b0c4-c6b57ce3adbf)<br/>
+<i>Behavioral Settings</i>
+<br/><br/>
 </p>
 
-# Requires
+</div>
 
-- Plasma >= 5.8
-- KDeclarative
-- Kirigami2
-
-# Install
-
-This is a QML applet and as such it can be easily installed from Plasma 5 Widgets Explorer or alternative you can execute `kpackagetool5 -i .` in the root directory of the applet.
-
-
+## Installation
+Either use "Add Widget functionality" or use ```kpackagetool5 -i ./``` when in the root directory of the applet
