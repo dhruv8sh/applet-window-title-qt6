@@ -24,7 +24,7 @@ Item {
     property alias cfg_lengthMarginsLock: lockItem.locked
     property alias cfg_fixedLength: fixedLengthSlider.value
     property alias cfg_maximumLength: maxLengthSlider.value
-    property alias cfg_showOnlyONMaximize: showOnlyOnMaximize.checked
+    //property alias cfg_showOnlyONMaximize: showOnlyOnMaximize.checked
 
     property alias cfg_subsMatch: root.selectedMatches
     property alias cfg_subsReplace: root.selectedReplacements
