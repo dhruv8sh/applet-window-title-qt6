@@ -33,11 +33,9 @@ PlasmoidItem {
     Plasmoid.onFormFactorChanged: plasmoid.configuration.formFactor = plasmoid.formFactor;
 
     Plasmoid.status: {
-        if ((broadcaster.hiddenFromBroadcast && !inEditMode)
-                || (!inEditMode && fallBackText === "" && !existsWindowActive)) {
+        if (!inEditMode && fallBackText === "" && !existsWindowActive) {
             return PlasmaCore.Types.HiddenStatus;
         }
-
         return PlasmaCore.Types.PassiveStatus;
     }
 
@@ -48,14 +46,9 @@ PlasmoidItem {
 
     readonly property bool inEditMode: plasmoid.userConfiguring
 
-    readonly property int containmentType: plasmoid.configuration.containmentType
     readonly property int thickness: plasmoid.formFactor === PlasmaCore.Types.Horizontal ? root.height : root.width
 
     readonly property int minimumLength: {
-        if (broadcaster.hiddenFromBroadcast) {
-            return 0;
-        }
-
         if (inContentsLengthMode) {
             return implicitTitleLength;
         } else if (inFixedLengthMode) {
@@ -68,10 +61,6 @@ PlasmoidItem {
     }
 
     readonly property int preferredLength: {
-        if (broadcaster.hiddenFromBroadcast) {
-            return 0;
-        }
-
         if (inContentsLengthMode) {
             return implicitTitleLength;
         } else if (inFixedLengthMode) {
@@ -84,10 +73,6 @@ PlasmoidItem {
     }
 
     readonly property int maximumLength: {
-        if (broadcaster.hiddenFromBroadcast) {
-            return 0;
-        }
-
         if (inContentsLengthMode) {
             return implicitTitleLength;
         } else if (inFixedLengthMode) {
@@ -295,7 +280,7 @@ PlasmoidItem {
     Loader {
         id: actionsLoader
         anchors.fill: inFillLengthMode ? parent : visibleContents
-        active: containmentType === 1
+        active: true
 
         sourceComponent: ActionsMouseArea {
             anchors.fill: parent

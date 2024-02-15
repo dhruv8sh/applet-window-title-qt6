@@ -1,27 +1,26 @@
 import QtQuick
-
+import org.kde.plasma.core
 import org.kde.plasma.plasmoid
 
 MouseArea {
     id: actionsArea
-    acceptedButtons: Qt.LeftButton | Qt.MidButton
+    acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
     property bool wheelIsBlocked: false
 
-    onClicked: {
-        if (existsWindowActive && mouse.button === Qt.MidButton) {
+    onClicked: function(event){
+        if (existsWindowActive && event.button === Qt.MiddleButton) {
             windowInfoLoader.item.requestClose();
         }
     }
 
-    onDoubleClicked: {
-        if (existsWindowActive && mouse.button === Qt.LeftButton) {
+    onDoubleClicked: function(){
+        if (existsWindowActive)
             windowInfoLoader.item.toggleMaximized();
-        }
     }
 
-    onWheel: {
-        if (wheelIsBlocked || !plasmoid.configuration.actionScrollMinimize) {
+    onWheel: function(wheel) {
+         if (wheelIsBlocked || !plasmoid.configuration.actionScrollMinimize) {
             return;
         }
 

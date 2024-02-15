@@ -6,8 +6,6 @@ import org.kde.plasma.core as PlasmaCore
 Item{
     id: broadcaster
 
-    property bool hiddenFromBroadcast: false
-
     readonly property bool showAppMenuEnabled: plasmoid.configuration.showAppMenuOnMouseEnter
     property bool menuIsPresent: false
     property var appMenusRequestCooperation: []
@@ -30,22 +28,6 @@ Item{
         }
     }
 
-    Component.onDestruction: broadcoastCooperationRequest(false)
-
-    onIsActiveChanged: {
-        if (!isActive) {
-            hiddenFromBroadcast = false;
-        }
-
-        broadcoastCooperationRequest(isActive)
-    }
-
-    onCooperationEstablishedChanged: {
-        if (!cooperationEstablished) {
-            broadcaster.hiddenFromBroadcast = false;
-        }
-    }
-
     onSendActivateAppMenuCooperationFromEditModeChanged: {
         if (plasmoid.configuration.sendActivateAppMenuCooperationFromEditMode >= 0) {
             var values = {
@@ -55,9 +37,6 @@ Item{
 
             releaseSendActivateAppMenuCooperation.start();
         }
-    }
-
-    function broadcoastCooperationRequest(enabled) {
     }
 
     Timer{

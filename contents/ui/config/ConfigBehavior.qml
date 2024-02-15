@@ -12,7 +12,6 @@ Item {
     property alias cfg_filterByScreen: filterByScreenChk.checked
     property alias cfg_filterActivityInfo: filterActivityChk.checked
 
-    property alias cfg_showAppMenuOnMouseEnter: showAppMenuChk.checked
     property alias cfg_showTooltip: showTooltip.checked
     property alias cfg_actionScrollMinimize: cycleMinimizeChk.checked
 
@@ -65,19 +64,7 @@ Item {
             CheckBox{
                 id: showTooltip
                 text: i18n("Show tooltip on hover")
-                enabled: showAppMenuChk.visible && !showAppMenuChk.checked
-            }
-
-            Label{
-                visible: showAppMenuChk.visible
-                enabled: showAppMenuChk.enabled
-            }
-
-            CheckBox{
-                id: showAppMenuChk
-                text: i18n("Show Window AppMenu applet on enter")
-                visible: plasmoid.configuration.containmentType === 2 /*Latte Containment*/
-                enabled: plasmoid.configuration.appMenuIsPresent
+                enabled: true
             }
 
             Label{
@@ -87,53 +74,10 @@ Item {
             CheckBox {
                 id: cycleMinimizeChk
                 text: i18n("Scroll to cycle and minimize through your tasks")
-                visible: plasmoid.configuration.containmentType === 1 /*Plasma Containment*/
+                visible: true
             }
         }
 
-        Kirigami.InlineMessage {
-            id: inlineMessage
-            Layout.fillWidth: true
-            Layout.bottomMargin: 5
-
-            type: Kirigami.MessageType.Warning
-            text: cfg_showAppMenuOnMouseEnter ?
-                      i18n("Would you like <b>also to activate</b> that behavior to surrounding Window AppMenu?") :
-                      i18n("Would you like <b>also to deactivate</b> that behavior to surrounding Window AppMenu?")
-
-            actions: [
-                Kirigami.Action {
-                    icon.name: "dialog-yes"
-                    text: i18n("Yes")
-                    onTriggered: {
-                        plasmoid.configuration.sendActivateAppMenuCooperationFromEditMode = cfg_showAppMenuOnMouseEnter;
-                        inlineMessage.visible = false;
-                    }
-                },
-                Kirigami.Action {
-                    icon.name: "dialog-no"
-                    text: "No"
-                    onTriggered: {
-                        inlineMessage.visible = false;
-                    }
-                }
-            ]
-
-            readonly property bool showWindowAppMenuTouched: showAppMenuChk.checked !== plasmoid.configuration.showAppMenuOnMouseEnter
-
-            onShowWindowAppMenuTouchedChanged: {
-                if (plasmoid.configuration.containmentType !== 2 /*Latte Containment*/) {
-                    visible = false;
-                    return;
-                }
-
-                if (showWindowAppMenuTouched){
-                    inlineMessage.visible = true;
-                } else {
-                    inlineMessage.visible = false;
-                }
-            }
-        }
 
         GridLayout {
             columns: 2
