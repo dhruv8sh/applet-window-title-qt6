@@ -1,7 +1,10 @@
 # Window Title Applet
 A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/applet-window-title/) for Latte Dock by the legendary [Psifidotos](https://github.com/psifidotos).
 > ### Requires Plasma 6
-
+## Mouse Gestures
+- <b>Scroll Wheel</b> : Cycle through tasks
+- <b>Double Click</b> : Maximize / Unmaximize
+- <b>Middle Button Click</b> : Close active task
 
 ## Images
 <div align="center">
@@ -23,12 +26,13 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
   
 ![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/f8c7855e-4da9-4dea-8748-abcaecdcbfb9)<br/>
 <i>Appearance Settings</i>
+
 <br/><br/>
 </p>
 
 <p>
 
-![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/eecbb542-587c-41e8-b0c4-c6b57ce3adbf)<br/>
+![Screenshot_20240215_234340](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/3145d78d-385f-417e-925d-54a67c9226b2)<br/>
 <i>Behavioral Settings</i>
 <br/><br/>
 </p>
