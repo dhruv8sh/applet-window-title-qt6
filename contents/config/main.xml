@@ -95,6 +95,10 @@
     <default>false</default>
     <label>If true, it shows window information only from the current screen</label>
   </entry>
+  <entry name="showOnlyOnMaximize" type="Bool">
+    <default>false</default>
+    <label>If true, it only shows information for Maximized windows</label>
+  </entry>
   <entry name="filterActivityInfo" type="Bool">
     <default>true</default>
     <label>If false, it shows only the placeHolder text</label>
