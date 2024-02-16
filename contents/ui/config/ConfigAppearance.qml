@@ -24,7 +24,6 @@ Item {
     property alias cfg_lengthMarginsLock: lockItem.locked
     property alias cfg_fixedLength: fixedLengthSlider.value
     property alias cfg_maximumLength: maxLengthSlider.value
-    //property alias cfg_showOnlyONMaximize: showOnlyOnMaximize.checked
 
     property alias cfg_subsMatch: root.selectedMatches
     property alias cfg_subsReplace: root.selectedReplacements
@@ -53,21 +52,7 @@ Item {
         id:mainColumn
         spacing: Kirigami.Units.largeSpacing
         Layout.fillWidth: true
-        // TODO: Apply show only on maximize
-        // GridLayout{
-        //     columns: 2
-        //
-        //     Label{
-        //         Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
-        //         text: i18n("Visibility:")
-        //         horizontalAlignment: Label.AlignRight
-        //     }
-        //     CheckBox{
-        //         id: showOnlyOnMaximize
-        //         text: i18n("Show only when maximized")
-        //         enabled: true
-        //     }
-        // }
+
         GridLayout{
             columns: 2
 

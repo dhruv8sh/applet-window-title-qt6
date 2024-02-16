@@ -18,6 +18,7 @@ Item {
     property alias cfg_subsMatch: behaviorPage.selectedMatches
     property alias cfg_subsReplace: behaviorPage.selectedReplacements
 
+    property alias cfg_showOnlyOnMaximize: showOnlyOnMaximize.checked
     property alias cfg_placeHolder: placeHolder.text
 
     // used as bridge to communicate properly between configuration and ui
@@ -49,6 +50,14 @@ Item {
             CheckBox{
                 id: filterByScreenChk
                 text: i18n("Show only window information from current screen")
+            }
+            Label{
+                horizontalAlignment: Label.AlignRight
+            }
+            CheckBox{
+                id: showOnlyOnMaximize
+                text: i18n("Show only when maximized")
+                enabled: true
             }
         }
 
