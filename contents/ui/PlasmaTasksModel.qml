@@ -93,8 +93,17 @@ Item {
 
                 onIsActiveChanged: {
                     if (isActive) {
-                        plasmaTasksItem.activeTaskItem = task;
+                        if(plasmoid.configuration.showOnlyOnMaximize && !task.isMaximized)
+                            plasmaTasksItem.activeTaskItem = null;
+                        else
+                            plasmaTasksItem.activeTaskItem = task;
+
                     }
+                }
+
+                onIsMaximizedChanged: {
+                    if(plasmoid.configuration.showOnlyOnMaximize && isActive)
+                        plasmaTasksItem.activeTaskItem = task.isMaximized ? task : null;
                 }
 
                 onModelAppNameChanged: task.cleanupTitle()
