@@ -5,6 +5,8 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 - <b>Scroll Wheel</b> : Cycle through tasks
 - <b>Double Click</b> : Maximize / Unmaximize
 - <b>Middle Button Click</b> : Close active task
+## Extra Features (Added over the original applet)
+- Show only on maximize
 
 ## Images
 <div align="center">
