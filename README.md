@@ -6,7 +6,9 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 - <b>Double Click</b> : Maximize / Unmaximize
 - <b>Middle Button Click</b> : Close active task
 ## Extra Features (Added over the original applet)
-- Show only on maximize
+
+- [x] Show only on maximize
+- [ ] Drag to move window
 
 ## Images
 <div align="center">
