@@ -45,3 +45,5 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 
 ## Installation
 Either use "Add Widget functionality" or use ```kpackagetool5 -i ./``` when in the root directory of the applet
+
+or install it from the AUR [plasma6-applets-window-title](https://aur.archlinux.org/packages/plasma6-applets-window-title).
