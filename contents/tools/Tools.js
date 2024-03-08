@@ -17,6 +17,8 @@
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+const defaultIconName = "start-here-kde-symbolic";
+
 function qBound(min,value,max)
 {
     return Math.max(Math.min(max, root.width - 150), min);

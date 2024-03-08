@@ -33,7 +33,7 @@ PlasmoidItem {
     Plasmoid.onFormFactorChanged: plasmoid.configuration.formFactor = plasmoid.formFactor;
 
     Plasmoid.status: {
-        if (!inEditMode && fallBackText === "" && !existsWindowActive) {
+        if (!inEditMode && fallBackText === "" && !existsWindowActive && Plasmoid.configuration.placeHolderIcon === "") {
             return PlasmaCore.Types.HiddenStatus;
         }
         return PlasmaCore.Types.PassiveStatus;
@@ -207,7 +207,7 @@ PlasmoidItem {
                                     metricsContents.applicationTextLength > root.width :
                                     metricsContents.applicationTextLength > root.height
 
-        visible: !(!plasmoid.configuration.filterActivityInfo && !root.existsWindowActive && !plasmoid.configuration.placeHolder)
+        visible: !(!plasmoid.configuration.filterActivityInfo && !root.existsWindowActive && !plasmoid.configuration.placeHolder && !plasmoid.configuration.placeHolderIcon)
     }
     // END Title Layout(s)
 
@@ -257,8 +257,8 @@ PlasmoidItem {
                 Layout.minimumHeight: 32 //Kirigami.Units.iconSizes.mediumSpacing ( above line same )
                 Layout.maximumWidth: Layout.minimumWidth
                 Layout.maximumHeight: Layout.minimumHeight
-                source:  existsWindowActive ? activeTaskItem.icon : fullActivityInfo.icon
-                visible: !plasmoid.configuration.showIcon
+                source:  existsWindowActive ? activeTaskItem.icon : plasmoid.configuration.placeHolderIcon
+                visible: !plasmoid.configuration.showIcon && (existsWindowActive || Plasmoid.configuration.placeHolderIcon !== "")
             }
 
             PlasmaComponents.Label {
