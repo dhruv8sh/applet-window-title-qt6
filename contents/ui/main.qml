@@ -221,8 +221,7 @@ PlasmoidItem {
 
         readonly property string text: {
             if (!existsWindowActive
-                    || !plasmoid.configuration.showTooltip
-                    || broadcaster.cooperationEstablished /*can not work correctly when showing appmenus*/) {
+                    || !plasmoid.configuration.showTooltip) {
                 return "";
             }
 
@@ -285,10 +284,5 @@ PlasmoidItem {
         sourceComponent: ActionsMouseArea {
             anchors.fill: parent
         }
-    }
-
-    Broadcaster{
-        id: broadcaster
-        anchors.fill: parent
     }
 }
