@@ -21,6 +21,14 @@
     <default>true</default>
     <label>show available icon</label>
   </entry>
+  <entry name="useActivityIcon" type="Bool">
+    <default>true</default>
+    <label>Activity icon shown when no windows active.</label>
+  </entry>
+  <entry name="placeHolderIcon" type="string">
+    <default>kde-symbolic</default>
+    <label>The icon shown if nothing else is available</label>
+  </entry>
   <entry name="iconFillThickness" type="Bool">
     <default>true</default>
     <label>icon fills applet thickness in order to not look too small in some cases</label>
