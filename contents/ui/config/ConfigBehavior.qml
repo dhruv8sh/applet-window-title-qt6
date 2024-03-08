@@ -3,8 +3,14 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 import org.kde.plasma.components
+
+import org.kde.ksvg 1.0 as KSvg
+import org.kde.iconthemes as KIconThemes
 import org.kde.kirigami as Kirigami
+
+import "../../tools/Tools.js" as Tools
 
 Item {
     id: behaviorPage
@@ -20,6 +26,7 @@ Item {
 
     property alias cfg_showOnlyOnMaximize: showOnlyOnMaximize.checked
     property alias cfg_placeHolder: placeHolder.text
+    property alias cfg_placeHolderIcon: placeHolderIcon.source
 
     // used as bridge to communicate properly between configuration and ui
     property var selectedMatches: []
@@ -111,6 +118,78 @@ Item {
                 enabled: !filterActivityChk.checked
 
                 placeholderText: i18n("placeholder text...")
+            }
+        }
+
+        GridLayout {
+            columns: 2
+            Label{
+                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
+                text: i18n("Placeholder icon:")
+                horizontalAlignment: Text.AlignRight
+            }
+
+            Button {
+                id: iconButton
+
+                implicitWidth: previewFrame.width + Kirigami.Units.smallSpacing * 2
+                implicitHeight: previewFrame.height + Kirigami.Units.smallSpacing * 2
+                hoverEnabled: true
+
+                Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
+                Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", placeHolderIcon)
+                Accessible.role: Accessible.ButtonMenu
+
+                ToolTip.delay: Kirigami.Units.toolTipDelay
+                ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", cfg_placeHolderIcon)
+                ToolTip.visible: iconButton.hovered && cfg_placeHolderIcon.length > 0
+
+                KIconThemes.IconDialog {
+                    id: iconDialog
+                    onIconNameChanged: cfg_placeHolderIcon = iconName || Tools.defaultIconName
+                }
+
+                onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
+
+                KSvg.FrameSvgItem {
+                    id: previewFrame
+                    anchors.centerIn: parent
+                    imagePath: "widgets/panel-background"
+                    width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
+                    height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
+
+                    Kirigami.Icon {
+                        id: placeHolderIcon
+                        anchors.centerIn: parent
+                        width: Kirigami.Units.iconSizes.large
+                        height: width
+                        source: Plasmoid.configuration.placeHolderIcon
+                    }
+                }
+
+                Menu {
+                    id: iconMenu
+                    y: +parent.height
+
+                    MenuItem {
+                        text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
+                        icon.name: "document-open-folder"
+                        Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
+                        onClicked: iconDialog.open()
+                    }
+                    MenuItem {
+                        text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
+                        icon.name: "edit-clear"
+                        enabled: cfg_placeHolderIcon !== Tools.defaultIconName
+                        onClicked: cfg_placeHolderIcon = Tools.defaultIconName
+                    }
+                    MenuItem {
+                        text: i18nc("@action:inmenu", "Remove icon")
+                        icon.name: "delete"
+                        enabled: cfg_placeHolderIcon !== ""
+                        onClicked: cfg_placeHolderIcon = ""
+                    }
+                }
             }
         }
 

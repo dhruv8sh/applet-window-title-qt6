@@ -64,7 +64,7 @@ GridLayout{
                                   root.thickness : iconItem.iconSize
         Layout.maximumHeight: Layout.minimumHeight
 
-        visible: plasmoid.configuration.showIcon
+        visible: plasmoid.configuration.showIcon && (existsWindowActive || Plasmoid.configuration.placeHolderIcon !== "")
 
         Kirigami.Icon{
             id: iconItem
@@ -73,7 +73,7 @@ GridLayout{
             anchors.bottomMargin: plasmoid.formFactor === PlasmaCore.Types.Horizontal ? thickMargin : 0
             anchors.leftMargin: plasmoid.formFactor === PlasmaCore.Types.Vertical ? thickMargin : 0
             anchors.rightMargin: plasmoid.formFactor === PlasmaCore.Types.Vertical ? thickMargin : 0
-            source: existsWindowActive ? activeTaskItem.icon : fullActivityInfo.icon
+            source: existsWindowActive ? activeTaskItem.icon : Plasmoid.configuration.placeHolderIcon
 
 
             readonly property int thickMargin: plasmoid.configuration.iconFillThickness ?
