@@ -17,7 +17,7 @@
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-const defaultIconName = "start-here-kde-symbolic";
+const defaultIconName = "kde-symbolic";
 
 function qBound(min,value,max)
 {
