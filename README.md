@@ -14,16 +14,16 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 ## Images
 <div align="center">
 <p>
-  
-![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/e5b1aa5b-b74b-490a-a9f3-2e55ea8030be)<br/>
-<i>Plasmoid on a normal Plasma Panel</i>
+
+![Screenshot_20240309_030116](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/3be393cf-616a-4eb5-ad25-aa47f4ceb250)<br/>
+<i>Plasmoid with Firefox web browser open</i>
 <br/><br/>
 </p>
 
 <p>
-  
-![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/ddff846f-5cb3-4324-8775-148c421c10ab)<br/>
-<i>Plasmoid on a floating Plasma Panel</i>
+
+![Screenshot_20240309_030208](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/52c59b33-b278-469c-9111-9ba0a0b2ae4f)<br/>
+<i>Example of placeholder text and icon</i>
 <br/><br/>
 </p>
 
