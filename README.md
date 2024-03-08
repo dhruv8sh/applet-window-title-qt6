@@ -8,6 +8,7 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 ## Extra Features (Added over the original applet)
 
 - [x] Show only on maximize
+- [x] Placeholder icon
 - [ ] Drag to move window
 
 ## Images
@@ -27,8 +28,8 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 </p>
 
 <p>
-  
-![](https://github.com/dhruv8sh/applet-window-title-qt6/assets/67322047/f8c7855e-4da9-4dea-8748-abcaecdcbfb9)<br/>
+
+![Screenshot_20240309_025532](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/49a7fbe9-5e9f-4e75-8b05-83e0cd87f8ec)<br/>
 <i>Appearance Settings</i>
 
 <br/><br/>
@@ -36,7 +37,7 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 
 <p>
 
-![Screenshot_20240215_234340](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/3145d78d-385f-417e-925d-54a67c9226b2)<br/>
+![Screenshot_20240309_025552](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/dd3ced74-c8f5-44d3-9b3a-b886eef694e9)<br/>
 <i>Behavioral Settings</i>
 <br/><br/>
 </p>
