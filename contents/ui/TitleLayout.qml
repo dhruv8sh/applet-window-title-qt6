@@ -98,7 +98,7 @@ GridLayout{
         Layout.preferredHeight: Layout.minimumHeight
         Layout.maximumHeight: Layout.minimumHeight
 
-        visible: mainIcon.visible && plasmoid.configuration.style !== 4 /*NoText*/
+        visible: mainIcon.visible && (firstTxt.visible || lastTxt.visible) && plasmoid.configuration.style !== 4 /*NoText*/
     }
 
     Item{
@@ -187,13 +187,7 @@ GridLayout{
                     return Text.ElideNone;
                 }
 
-                visible: {
-                    if (!isUsedForMetrics && showsTitleText && exceedsApplicationText) {
-                        return false;
-                    }
-
-                    return true;
-                }
+                visible: text !== "" && !(!isUsedForMetrics && showsTitleText && exceedsApplicationText)
             }
 
             Label{
