@@ -1,21 +1,4 @@
-/*
-*  Copyright 2018 Michail Vourlakos <mvourlakos@gmail.com>
-*
-*  This file is part of applet-window-title
-*
-*  Latte-Dock is free software; you can redistribute it and/or
-*  modify it under the terms of the GNU General Public License as
-*  published by the Free Software Foundation; either version 2 of
-*  the License, or (at your option) any later version.
-*
-*  Latte-Dock is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+const defaultIconName = "kde-symbolic";
 
 function qBound(min,value,max)
 {
@@ -32,15 +15,15 @@ function cleanStringListItem(item)
     }
 }
 
-function applySubstitutes(text)
+function applySubstitutes(pat,name,windowtitle)
 {
     var minSize = Math.min(plasmoid.configuration.subsMatch.length, plasmoid.configuration.subsReplace.length);
-
+    let text = pat.replace("%a",name).replace("%w",windowtitle);
     for (var i = 0; i<minSize; ++i){
         var fromS = cleanStringListItem(plasmoid.configuration.subsMatch[i]);
         var toS = cleanStringListItem(plasmoid.configuration.subsReplace[i]);
         var regEx = new RegExp(fromS, "ig"); //case insensitive
-        text = text.replace(regEx,toS);
+        text = text.replace(regEx,toS).replace("%a",name).replace("%w",windowtitle);
     }
 
     return text;

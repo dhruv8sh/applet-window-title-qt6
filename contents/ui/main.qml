@@ -33,7 +33,7 @@ PlasmoidItem {
     Plasmoid.onFormFactorChanged: plasmoid.configuration.formFactor = plasmoid.formFactor;
 
     Plasmoid.status: {
-        if (!inEditMode && fallBackText === "" && !existsWindowActive) {
+        if (!inEditMode && fallBackText === "" && !existsWindowActive && Plasmoid.configuration.placeHolderIcon === "") {
             return PlasmaCore.Types.HiddenStatus;
         }
         return PlasmaCore.Types.PassiveStatus;
@@ -106,11 +106,11 @@ PlasmoidItem {
         }
 
         if (plasmoid.configuration.style === 0){ /*Application*/
-            return Tools.applySubstitutes(activeTaskItem.appName);
+            return Tools.applySubstitutes("%a",activeTaskItem.appName,activeTaskItem.title);
         } else if (plasmoid.configuration.style === 1){ /*Title*/
             return activeTaskItem.title;
         } else if (plasmoid.configuration.style === 2){ /*ApplicationTitle*/
-            return Tools.applySubstitutes(activeTaskItem.appName);
+            return Tools.applySubstitutes("%w",activeTaskItem.appName,activeTaskItem.title);
         } else if (plasmoid.configuration.style === 3){ /*TitleApplication*/
             var finalText = activeTaskItem.appName === activeTaskItem.title ?
                         Tools.applySubstitutes(activeTaskItem.appName) : activeTaskItem.title;
@@ -133,7 +133,7 @@ PlasmoidItem {
 
             return finalText;
         } else if (plasmoid.configuration.style === 3){ /*TitleApplication*/
-            var finalText = activeTaskItem.appName === activeTaskItem.title ? "" : Tools.applySubstitutes(activeTaskItem.appName);
+            var finalText = activeTaskItem.appName === activeTaskItem.title ? "" : Tools.applySubstitutes("%a",activeTaskItem.appName,activeTaskItem.title);
 
             return finalText;
         }
@@ -187,7 +187,7 @@ PlasmoidItem {
         isUsedForMetrics: true
     }
 
-    // This is the reas Visible Layout that is shown to the user
+    // This is the Visible Layout that is shown to the user
     TitleLayout {
         id: visibleContents
         anchors.top: parent.top
@@ -207,7 +207,7 @@ PlasmoidItem {
                                     metricsContents.applicationTextLength > root.width :
                                     metricsContents.applicationTextLength > root.height
 
-        visible: !(!plasmoid.configuration.filterActivityInfo && !root.existsWindowActive && !plasmoid.configuration.placeHolder)
+        visible: !(!plasmoid.configuration.filterActivityInfo && !root.existsWindowActive && !plasmoid.configuration.placeHolder && !plasmoid.configuration.placeHolderIcon)
     }
     // END Title Layout(s)
 
@@ -221,8 +221,7 @@ PlasmoidItem {
 
         readonly property string text: {
             if (!existsWindowActive
-                    || !plasmoid.configuration.showTooltip
-                    || broadcaster.cooperationEstablished /*can not work correctly when showing appmenus*/) {
+                    || !plasmoid.configuration.showTooltip) {
                 return "";
             }
 
@@ -257,8 +256,8 @@ PlasmoidItem {
                 Layout.minimumHeight: 32 //Kirigami.Units.iconSizes.mediumSpacing ( above line same )
                 Layout.maximumWidth: Layout.minimumWidth
                 Layout.maximumHeight: Layout.minimumHeight
-                source:  existsWindowActive ? activeTaskItem.icon : fullActivityInfo.icon
-                visible: !plasmoid.configuration.showIcon
+                source:  existsWindowActive ? activeTaskItem.icon : plasmoid.configuration.placeHolderIcon
+                visible: !plasmoid.configuration.showIcon && (existsWindowActive || Plasmoid.configuration.placeHolderIcon !== "")
             }
 
             PlasmaComponents.Label {
@@ -285,10 +284,5 @@ PlasmoidItem {
         sourceComponent: ActionsMouseArea {
             anchors.fill: parent
         }
-    }
-
-    Broadcaster{
-        id: broadcaster
-        anchors.fill: parent
     }
 }

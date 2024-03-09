@@ -221,7 +221,6 @@ Item {
                 break;
             }
         }
-
         tasksModel.requestActivate(target);
     }
 }

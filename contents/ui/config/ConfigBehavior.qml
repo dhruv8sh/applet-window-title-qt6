@@ -3,8 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 import org.kde.plasma.components
+
 import org.kde.kirigami as Kirigami
+
+import "../../tools/Tools.js" as Tools
 
 Item {
     id: behaviorPage
