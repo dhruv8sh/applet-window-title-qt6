@@ -79,15 +79,15 @@ SlidingBox {
         Label{
             Layout.fillWidth: true
             horizontalAlignment: Qt.AlignHCenter
+            text: i18n("%a for Application Name, %w for window title")
+        }
+
+        Label{
+            Layout.fillWidth: true
+            horizontalAlignment: Qt.AlignHCenter
             font.italic: true
             color: "#ff0000"
-            text: {
-                if (page.selectedMatches.length !== page.selectedReplacements.length) {
-                    return i18n("Warning: Matches and Replacements do not have the same size...");
-                }
-
-                return "";
-            }
+            text: page.selectedMatches.length !== page.selectedReplacements.length ? i18n("Warning: Matches and Replacements do not have the same size...") : "";
         }
     }
 }

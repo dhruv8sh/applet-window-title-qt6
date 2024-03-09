@@ -106,11 +106,11 @@ PlasmoidItem {
         }
 
         if (plasmoid.configuration.style === 0){ /*Application*/
-            return Tools.applySubstitutes(activeTaskItem.appName);
+            return Tools.applySubstitutes("%a",activeTaskItem.appName,activeTaskItem.title);
         } else if (plasmoid.configuration.style === 1){ /*Title*/
             return activeTaskItem.title;
         } else if (plasmoid.configuration.style === 2){ /*ApplicationTitle*/
-            return Tools.applySubstitutes(activeTaskItem.appName);
+            return Tools.applySubstitutes("%w",activeTaskItem.appName,activeTaskItem.title);
         } else if (plasmoid.configuration.style === 3){ /*TitleApplication*/
             var finalText = activeTaskItem.appName === activeTaskItem.title ?
                         Tools.applySubstitutes(activeTaskItem.appName) : activeTaskItem.title;
@@ -133,7 +133,7 @@ PlasmoidItem {
 
             return finalText;
         } else if (plasmoid.configuration.style === 3){ /*TitleApplication*/
-            var finalText = activeTaskItem.appName === activeTaskItem.title ? "" : Tools.applySubstitutes(activeTaskItem.appName);
+            var finalText = activeTaskItem.appName === activeTaskItem.title ? "" : Tools.applySubstitutes("%a",activeTaskItem.appName,activeTaskItem.title);
 
             return finalText;
         }
@@ -187,7 +187,7 @@ PlasmoidItem {
         isUsedForMetrics: true
     }
 
-    // This is the reas Visible Layout that is shown to the user
+    // This is the Visible Layout that is shown to the user
     TitleLayout {
         id: visibleContents
         anchors.top: parent.top

@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 
-Item{
+Item {
     id: box
     clip: true
 
@@ -12,7 +12,6 @@ Item{
     /*y: slideOutFrom === PlasmaCore.Types.BottomEdge ? 0
     height: 0*/
     opacity: 0
-
     property QtObject contentItem: null
     property int slideOutFrom: PlasmaCore.Types.TopEdge
 
@@ -91,7 +90,7 @@ Item{
             color: palette.alternateBase
             border.width: 1
             border.color: palette.mid
-            radius: 1
+            radius: 5
 
             layer.enabled: true
         }
