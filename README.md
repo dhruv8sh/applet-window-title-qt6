@@ -5,11 +5,16 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 - <b>Scroll Wheel</b> : Cycle through tasks
 - <b>Double Click</b> : Maximize / Unmaximize
 - <b>Middle Button Click</b> : Close active task
+## Substitutions
+- <b>%a</b> : Application Name
+- <b>%w</b> : Windows Title
 ## Extra Features (Added over the original applet)
 
 - [x] Show only on maximize
 - [x] Placeholder icon
+- [x] Special Substitutions
 - [ ] Drag to move window
+- [ ] Application menu like context menu on right-click (The menu when clicking on title bar)
 
 ## Images
 <div align="center">
