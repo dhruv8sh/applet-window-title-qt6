@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -12,9 +13,6 @@
         "Id": "org.kde.windowtitle",
         "License": "GPLv2",
         "Name": "Window Title",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "0.7.1",
         "Website": "https://github.com/psifidotos/applet-window-title"
     },
