@@ -3,8 +3,8 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "mvourlakos@gmail.com",
-                "Name": "Michail Vourlakos"
+                "Email": "dhruv8sh@proton.me",
+                "Name": "Dhruvesh Surolia"
             }
         ],
         "Category": "Windows and Tasks",
@@ -13,9 +13,14 @@
         "Id": "org.kde.windowtitle",
         "License": "GPLv2",
         "Name": "Window Title",
+<<<<<<< Updated upstream
         "Version": "0.7.1",
+=======
+        "Version": "0.5.5",
+>>>>>>> Stashed changes
         "Website": "https://github.com/psifidotos/applet-window-title"
     },
     "Keyword": "window title icon",
+    "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API-Minimum-Version": "6.0"
 }

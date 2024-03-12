@@ -103,6 +103,10 @@
     <default>false</default>
     <label>If true, it shows window information only from the current screen</label>
   </entry>
+  <entry name="elideMiddle" type="Bool">
+    <default>true</default>
+    <label>If true, elides text in the middle else in the last</label>
+  </entry>
   <entry name="showOnlyOnMaximize" type="Bool">
     <default>false</default>
     <label>If true, it only shows information for Maximized windows</label>

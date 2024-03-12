@@ -78,7 +78,7 @@ Item {
                 ];
 
                 Component.onCompleted: currentIndex = plasmoid.configuration.style;
-                onChoiceClicked: root.selectedStyle = index;
+                onChoiceClicked: (index) => {root.selectedStyle = index;}
             }
         }
 
@@ -259,7 +259,7 @@ Item {
                 ];
 
                 Component.onCompleted: currentIndex = plasmoid.configuration.lengthPolicy
-                onChoiceClicked: root.selectedLengthPolicy = index;
+                onChoiceClicked: root.selectedLengthPolicy = currentIndex;
             }
 
             Label{

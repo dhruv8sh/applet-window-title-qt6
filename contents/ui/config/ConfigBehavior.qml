@@ -18,6 +18,7 @@ Item {
 
     property alias cfg_showTooltip: showTooltip.checked
     property alias cfg_actionScrollMinimize: cycleMinimizeChk.checked
+    property alias cfg_elideMiddle: elidePosition.isMiddle
 
     property alias cfg_subsMatch: behaviorPage.selectedMatches
     property alias cfg_subsReplace: behaviorPage.selectedReplacements
@@ -63,6 +64,23 @@ Item {
                 text: i18n("Show only when maximized")
                 enabled: true
             }
+            Label{
+                text: i18n("Elide text:")
+                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
+                horizontalAlignment: Label.AlignRight
+            }
+            ComboBox{
+                id: elidePosition
+                property bool isMiddle: plasmoid.configuration.elideMiddle
+                textRole: "text"
+                model:[
+                    {text: "Right", value: false},
+                    {text: "Middle", value: true}
+                ];
+                currentIndex: plasmoid.configuration.elideMiddle ? 1 : 0;
+                onCurrentIndexChanged: isMiddle = model[currentIndex].value
+            }
+
         }
 
         GridLayout {

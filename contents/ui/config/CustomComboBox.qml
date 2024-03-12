@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 
 Controls.ComboBox{
     id: combobox
@@ -51,7 +52,7 @@ Controls.ComboBox{
             Text{
                 id: label
                 anchors.left: parent.left
-                anchors.leftMargin: units.smallSpacing
+                anchors.leftMargin: Kirigami.Units.smallSpacing
                 anchors.verticalCenter: parent.verticalCenter
                 text: choices[index];
                 color: containsMouse ? palette.highlightedText : palette.text
