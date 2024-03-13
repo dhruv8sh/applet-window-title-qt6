@@ -78,14 +78,10 @@ GridLayout{
         Layout.preferredWidth : Layout.minimumWidth
         Layout.preferredHeight: Layout.minimumHeight
 
-<<<<<<< Updated upstream
-        visible: mainIcon.visible && (firstTxt.visible || lastTxt.visible) && plasmoid.configuration.style !== 4 /*NoText*/
-=======
         Layout.maximumHeight  : Layout.minimumHeight
         Layout.maximumWidth   : Layout.minimumWidth
 
-        visible               : mainIcon.visible && && (firstTxt.visible || lastTxt.visible) && !root.isNoTextStyle
->>>>>>> Stashed changes
+        visible               : mainIcon.visible && (firstTxt.visible || lastTxt.visible) && !isNoTextStyle
     }
     Item{
         id: textsContainer
@@ -141,7 +137,7 @@ GridLayout{
                     bold                : plasmoid.configuration.boldFont
                     italic              : plasmoid.configuration.italicFont
                 }
-                visible                 : !isUsedForMetrics && (!showsTitleText || !exceedsApplicationText)
+                visible                 : !(!isUsedForMetrics && showsTitleText && exceedsApplicationText)
 
                 readonly property bool showsTitleText      : root.isTitleStyle       || root.isTitleApplicationStyle
                 readonly property bool showsApplicationText: root.isApplicationStyle || root.isApplicationTitleStyle
@@ -152,24 +148,11 @@ GridLayout{
                     else if (root.isTitleApplicationStyle
                                && activeTaskItem
                                && activeTaskItem.appName !== activeTaskItem.title
-<<<<<<< Updated upstream
-                               && titleLayout.exceedsAvailableSpace){ /*TitleApplication*/
-                        return Text.ElideMiddle;
-                    } else if (showsApplicationText && !isUsedForMetrics && exceedsApplicationText) {
-                        return Text.ElideMiddle;
-                    }
-
-                    return Text.ElideNone;
-                }
-
-                visible: text !== "" && !(!isUsedForMetrics && showsTitleText && exceedsApplicationText)
-=======
                                && titleLayout.exceedsAvailableSpace)
                                                                                                   return plasmoid.configuration.elideMiddle ? Text.ElideMiddle : Text.ElideRight;
                     else if (showsApplicationText && !isUsedForMetrics && exceedsApplicationText) return plasmoid.configuration.elideMiddle ? Text.ElideMiddle : Text.ElideRight;
                     else                                                                          return Text.ElideNone;
                 }
->>>>>>> Stashed changes
             }
 
             Label{

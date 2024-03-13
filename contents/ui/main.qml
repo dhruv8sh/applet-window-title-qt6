@@ -73,13 +73,7 @@ PlasmoidItem {
 
     readonly property Item activeTaskItem: windowInfoLoader.item.activeTaskItem
 
-    property string fallBackText: {
-        if (!plasmoid.configuration.filterActivityInfo) {
-            return plasmoid.configuration.placeHolder;
-        } else {
-            return fullActivityInfo.name;
-        }
-    }
+    property string fallBackText: plasmoid.configuration.filterActivityInfo ? fullActivityInfo.name : plasmoid.configuration.placeHolder
 
     readonly property string firstTitleText: {
         if      (!activeTaskItem)                     return "";
@@ -103,12 +97,12 @@ PlasmoidItem {
     // Do Not Touch !!
     // BEGIN Tasks logic
     TaskManager.ActivityInfo { id: activityInfo }
+
     Activities.ActivityInfo {
         id: fullActivityInfo
         activityId: ":current"
     }
     TaskManager.VirtualDesktopInfo { id: virtualDesktopInfo }
-
     Loader {
         id: windowInfoLoader
         sourceComponent: plasmaTasksModel
