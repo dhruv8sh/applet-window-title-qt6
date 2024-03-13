@@ -37,6 +37,10 @@
     <default>36</default>
     <label>icon size when fill thickness is not enabled</label>
   </entry>
+  <entry name="fontSize" type="Int">
+    <default>12</default>
+    <label>font size</label>
+  </entry>
   <entry name="boldFont" type="Bool">
     <default>true</default>
     <label>bold text font</label>

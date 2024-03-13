@@ -9,7 +9,7 @@ import org.kde.ksvg as KSvg
 
 import "../../tools/Tools.js" as Tools
 
-Item {
+Kirigami.ScrollablePage {
     id: root
 
     property alias cfg_boldFont: boldChk.checked
@@ -28,6 +28,7 @@ Item {
     property alias cfg_maximumLength: maxLengthSlider.value
     property alias cfg_placeHolderIcon: placeHolderIcon.source
     property alias cfg_useActivityIcon: useActivityIcon.checked
+    property alias cfg_fontSize: fontSize.value
 
     property alias cfg_subsMatch: root.selectedMatches
     property alias cfg_subsReplace: root.selectedReplacements
@@ -219,13 +220,23 @@ Item {
             }
 
             Label{
-                id: italicLbl
-                font.italic: true
             }
 
             CheckBox{
                 id: italicChk
                 text: i18n("Italic")
+            }
+
+            Label {
+                Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
+                text: i18n("Font Size:")
+                horizontalAlignment: Label.AlignRight
+            }
+
+            SpinBox{
+                id: fontSize
+                from: 8
+                to: 64
             }
 
             Label{

@@ -136,6 +136,7 @@ GridLayout{
                     capitalization      : plasmoid.configuration.capitalFont ? Font.Capitalize : Font.MixedCase
                     bold                : plasmoid.configuration.boldFont
                     italic              : plasmoid.configuration.italicFont
+                    pixelSize           : plasmoid.configuration.fontSize
                 }
                 visible                 : !(!isUsedForMetrics && showsTitleText && exceedsApplicationText)
 
