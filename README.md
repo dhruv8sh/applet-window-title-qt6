@@ -15,6 +15,7 @@ A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/apple
 - [x] Special Substitutions
 - [x] Click to open overview
 - [x] Ability to Elide Text to Right
+- [x] Customizable font size
 - [ ] Drag to move window
 - [ ] Application menu like context menu on right-click (The menu when clicking on title bar)
 
