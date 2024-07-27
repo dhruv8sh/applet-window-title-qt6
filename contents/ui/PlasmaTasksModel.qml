@@ -1,4 +1,3 @@
-
 import QtQuick
 import QtQml.Models
 
@@ -156,15 +155,13 @@ Item {
     }
 
     function toggleMinimized() {
-        if (activeTaskItem) {
+        if (activeTaskItem)
             activeTaskItem.toggleMinimized();
-        }
     }
 
     function requestClose() {
-        if (activeTaskItem) {
+        if (activeTaskItem)
             activeTaskItem.requestClose();
-        }
     }
 
     function togglePinToAllDesktops() {

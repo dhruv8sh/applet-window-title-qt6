@@ -8,14 +8,16 @@ MouseArea {
     acceptedButtons: Qt.LeftButton | Qt.MiddleButton
     anchors.fill: parent
     property bool wheelIsBlocked: false
-
     onClicked: function(event){
-        if (existsWindowActive && event.button === Qt.MiddleButton) windowInfoLoader.item.requestClose();
-        else if( event.button === Qt.LeftButton ) executable.exec("qdbus org.kde.kglobalaccel /component/kwin invokeShortcut Overview");
+        if(existsWindowActive && event.button === Qt.MiddleButton && cfg.closeAllowed)
+            windowInfoLoader.item.requestClose();
     }
-    onDoubleClicked: { if (existsWindowActive) windowInfoLoader.item.toggleMaximized(); }
+    onDoubleClicked: {
+        if(existsWindowActive && cfg.maxminAllowed)
+            windowInfoLoader.item.toggleMaximized();
+    }
     onWheel: function(wheel) {
-        if (wheelIsBlocked || !plasmoid.configuration.actionScrollMinimize) return;
+        if (wheelIsBlocked || !cfg.scrollAllowed) return;
         wheelIsBlocked = true;
         scrollDelayer.start();
         var delta = 0;

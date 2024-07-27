@@ -4,172 +4,49 @@ import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
-import org.kde.plasma.components
-
+import org.kde.plasma.components as PC3
 import org.kde.kirigami as Kirigami
 
-import "../../tools/Tools.js" as Tools
+Kirigami.ScrollablePage {
+    readonly property alias cfg_filterByScreen: filterByScreenChk.checked
+    readonly property alias cfg_filterByMaximized: filterByMaximizedChk.checked
+    readonly property alias cfg_showTooltip: showTooltipChk.checked
+    readonly property alias cfg_maxminAllowed: maxminAllowed.checked
+    readonly property alias cfg_closeAllowed: closeAllowed.checked
+    readonly property alias cfg_scrollAllowed: scrollAllowed.checked
 
-Item {
-    id: behaviorPage
-
-    property alias cfg_filterByScreen: filterByScreenChk.checked
-    property alias cfg_filterActivityInfo: filterActivityChk.checked
-
-    property alias cfg_showTooltip: showTooltip.checked
-    property alias cfg_actionScrollMinimize: cycleMinimizeChk.checked
-    property alias cfg_elideMiddle: elidePosition.isMiddle
-
-    property alias cfg_subsMatch: behaviorPage.selectedMatches
-    property alias cfg_subsReplace: behaviorPage.selectedReplacements
-
-    property alias cfg_showOnlyOnMaximize: showOnlyOnMaximize.checked
-    property alias cfg_placeHolder: placeHolder.text
-
-    // used as bridge to communicate properly between configuration and ui
-    property var selectedMatches: []
-    property var selectedReplacements: []
-
-    // used from the ui
-    readonly property real centerFactor: 0.3
-    readonly property int minimumWidth: 220
-
-    ColumnLayout {
-        id:mainColumn
-        spacing: Kirigami.Units.largeSpacing
-        width:parent.width - anchors.leftMargin * 2
-        height: parent.height
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.leftMargin: 2
-
-        GridLayout {
-            columns: 2
-
-            Label{
-                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
-                text: i18n("Filters:")
-                horizontalAlignment: Label.AlignRight
-            }
-
-            CheckBox{
-                id: filterByScreenChk
-                text: i18n("Show only window information from current screen")
-            }
-            Label{
-                horizontalAlignment: Label.AlignRight
-            }
-            CheckBox{
-                id: showOnlyOnMaximize
-                text: i18n("Show only when maximized")
-                enabled: true
-            }
-            Label{
-                text: i18n("Elide text:")
-                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
-                horizontalAlignment: Label.AlignRight
-            }
-            ComboBox{
-                id: elidePosition
-                property bool isMiddle: plasmoid.configuration.elideMiddle
-                textRole: "text"
-                model:[
-                    {text: "Right", value: false},
-                    {text: "Middle", value: true}
-                ];
-                currentIndex: plasmoid.configuration.elideMiddle ? 1 : 0;
-                onCurrentIndexChanged: isMiddle = model[currentIndex].value
-            }
-
+    Kirigami.FormLayout {
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: "Info Filtering"
         }
-
-        GridLayout {
-            columns: 2
-
-            Label{
-                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
-                text: i18n("Mouse:")
-                horizontalAlignment: Label.AlignRight
-            }
-
-            CheckBox{
-                id: showTooltip
-                text: i18n("Show tooltip on hover")
-                enabled: true
-            }
-
-            Label{
-                visible: cycleMinimizeChk.visible
-            }
-
-            CheckBox {
-                id: cycleMinimizeChk
-                text: i18n("Scroll to cycle and minimize through your tasks")
-                visible: true
-            }
+        PC3.CheckBox{
+            id: filterByScreenChk
+            Kirigami.FormData.label: i18n("Show only from current screen:")
         }
-
-
-        GridLayout {
-            columns: 2
-            Label{
-                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
-                text: i18n("Placeholder:")
-                horizontalAlignment: Label.AlignRight
-            }
-
-            CheckBox{
-                id: filterActivityChk
-                text: i18n("Show activity information")
-            }
-
-            Label{}
-
-            TextField {
-                id: placeHolder
-                text: plasmoid.configuration.placeHolder
-                Layout.minimumWidth: substitutionsBtn.width * 1.5
-                Layout.maximumWidth: Layout.minimumWidth
-                enabled: !filterActivityChk.checked
-
-                placeholderText: i18n("placeholder text...")
-            }
+        PC3.CheckBox{
+            id: filterByMaximizedChk
+            Kirigami.FormData.label: i18n("Show only when maximized:")
         }
-
-        GridLayout{
-            columns: 2
-
-            Label{
-                Layout.minimumWidth: Math.max(centerFactor * behaviorPage.width, minimumWidth)
-                text: i18n("Application name:")
-                horizontalAlignment: Label.AlignRight
-            }
-
-            Button{
-                id: substitutionsBtn
-                checkable: true
-                checked: subsSlidingBox.shown
-                text: "  " + i18n("Manage substitutions...") + "  "
-                onClicked: {
-                    if (subsSlidingBox.shown) {
-                        subsSlidingBox.slideOut();
-                    } else {
-                        subsSlidingBox.slideIn();
-                    }
-                }
-
-                SubstitutionsPopup {
-                    id: subsSlidingBox
-                    page: behaviorPage
-                    slideOutFrom: PlasmaCore.Types.BottomEdge
-                }
-            }
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: "Gestures"
         }
-
-        Item {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+        PC3.CheckBox{
+            id: showTooltipChk
+            Kirigami.FormData.label: i18n("Show tooltip on hover:")
+        }
+        PC3.CheckBox{
+            id: maxminAllowed
+            Kirigami.FormData.label: i18n("Double-Click to maximize/minimize:")
+        }
+        PC3.CheckBox{
+            id: closeAllowed
+            Kirigami.FormData.label: i18n("Middle-Click to close:")
+        }
+        PC3.CheckBox{
+            id: scrollAllowed
+            Kirigami.FormData.label: i18n("Scroll through tasks:")
         }
     }
-
 }
