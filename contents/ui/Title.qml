@@ -14,7 +14,7 @@ GridLayout {
     Layout.maximumHeight: parent.height
     //Calculated length for the label
     property real labelLen : {
-        let neededInViewLen = cfg.firstSpace+cfg.midSpace+cfg.lastSpace
+        let neededInViewLen = cfg.firstSpace+cfg.midSpace+cfg.lastSpace+cfg.lastSpace
         neededInViewLen += isVertical?iconItem.height:iconItem.width
         return cfg.fixedLength-neededInViewLen
     }
@@ -29,10 +29,9 @@ GridLayout {
         Layout.maximumHeight  : Layout.minimumHeight
         visible               : cfg.visible
         property int thickness: isVertical ? parent.width : parent.height
-
         Kirigami.Icon {
             anchors {
-                fill         : parent
+                fill         :  parent
                 topMargin    : !isVertical ? thickMargin : 0
                 bottomMargin : !isVertical ? thickMargin : 0
                 leftMargin   :  isVertical ? thickMargin : 0
@@ -45,16 +44,25 @@ GridLayout {
     }
     CItem {length: cfg.midSpace}
     CItem{
-        length : label.implicitWidth
+        length : {
+            if(cfg.lengthKind == 0) return label.implicitWidth
+            else if(cfg.lengthKind == 1) return labelLen
+            else return Math.min(label.implicitWidth,labelLen)
+        }
+        clip: true
         PlasmaComponents.Label {
             id                      : label
             verticalAlignment       : Text.AlignVCenter
             text                    : root.text
             color                   : Kirigami.Theme.textColor
-            rotation                : isVertical?plasmoid.location===PlasmaCore.Types.LeftEdge?-90:90:0
             elide                   : Tools.getElide(cfg.elidePos)
-            width                   : cfg.lengthKind>0?labelLen:-1
-
+            width : {
+                if(cfg.lengthKind == 0) return label.implicitWidth
+                else if(cfg.lengthKind == 1) return labelLen
+                else return Math.min(label.implicitWidth,labelLen)
+            }
+            rotation                : isVertical?plasmoid.location===PlasmaCore.Types.LeftEdge?-90:90:0
+            anchors.centerIn        : parent
             font {
                 capitalization      : cfg.isCaps ? Font.Capitalize : Font.MixedCase
                 bold                : cfg.isBold

@@ -8,4 +8,10 @@ Item {
     Layout.maximumWidth:  isVertical?root.width :length
     Layout.minimumHeight:!isVertical?root.height:length
     Layout.maximumHeight:!isVertical?root.height:length
+    /*Rectangle{
+        color: "green"
+        anchors.fill: parent
+        border.color: "red"
+        border.width: 1
+    }*/
 }

@@ -14,9 +14,10 @@
         <entry name="iconSize"      type="Int"><default>24</default></entry>
         <entry name="fixedLength"   type="Int"><default>400</default></entry>
         <entry name="customSize"    type="Int"><default>24</default></entry>
-        <entry name="elidePos"      type="Int"><default>true</default></entry>
+        <entry name="elidePos"      type="Int"><default>3</default></entry>
         <entry name="txt"           type="String"><default>%a - %w</default></entry>
         <entry name="altTxt"        type="String"><default>%q</default></entry>
+        <entry name="txtSameFound"  type="String"><default>%a</default></entry>
         <entry name="customIcon"    type="String"><default>kde-symbolic</default></entry>
         <entry name="isBold"        type="Bool"><default>false</default></entry>
         <entry name="isItalic"      type="Bool"><default>false</default></entry>
@@ -25,7 +26,6 @@
         <entry name="fillThickness" type="Bool"><default>false</default></entry>
         <entry name="noIcon"        type="Bool"><default>false</default></entry>
         <entry name="activityIcon"  type="Bool"><default>true</default></entry>
-        <entry name="txtSameFound"  type="String"><default>%a</default></entry>
         </group>
     <group name="Behavior">
         <entry name="filterByScreen"    type="Bool"><default>false</default></entry>

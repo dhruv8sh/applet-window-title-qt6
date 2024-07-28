@@ -24,9 +24,8 @@ PlasmoidItem {
     readonly property var cfg:                      plasmoid.configuration
 
     property Item activeTaskItem:                   windowInfoLoader.item.activeTaskItem
-    property string text: existsWindowActive ? Tools.substitute(cfg.txt) : Tools.altSubstitute()
-    property var icon: Tools.getIcon()
-
+    property var icon:                              Tools.getIcon()
+    property string text:                           Tools.getText()
     states: [
         State{
             name: "editMode"
@@ -66,8 +65,8 @@ PlasmoidItem {
             when: cfg.lengthKind === 2 && !isVertical
             PropertyChanges{
                 target: root
-                Layout.minimumWidth: Math.min(Layout.maximumWidth,titleLayout.implicitWidth)
-                Layout.maximumWidth: cfg.fixedLength
+                Layout.minimumWidth: Math.min(cfg.fixedLength,titleLayout.implicitWidth)
+                Layout.maximumWidth: Math.min(cfg.fixedLength,titleLayout.implicitWidth)
                 Layout.fillHeight:   true
             }
         },
@@ -77,7 +76,7 @@ PlasmoidItem {
             PropertyChanges{
                 target: root
                 Layout.minimumHeight: titleLayout.implicitHeight
-                Layout.maximumHeight: titleLayout.implicitHeight
+                Layout.maximumHeight: Layout.minimumHeight
                 Layout.fillWidth:     true
             }
         },
@@ -96,8 +95,8 @@ PlasmoidItem {
             when: cfg.lengthKind === 2 && isVertical
             PropertyChanges{
                 target: root
-                Layout.minimumHeight: 0
-                Layout.maximumHeight: cfg.fixedLength
+                Layout.minimumHeight: Math.min(cfg.fixedLength,titleLayout.implicitHeight)
+                Layout.maximumHeight: Math.min(cfg.fixedLength,titleLayout.implicitHeight)
                 Layout.fillWidth:     true
             }
         }
@@ -126,26 +125,15 @@ PlasmoidItem {
             spacing:                    Kirigami.Units.largeSpacing
             Layout.margins:             Kirigami.Units.smallSpacing
             Kirigami.Icon {
-                Layout.minimumWidth:     Kirigami.Units.largeSpacing
-                Layout.minimumHeight:    Kirigami.Units.largeSpacing
-                Layout.maximumWidth:          Layout.minimumWidth
-                Layout.maximumHeight:         Layout.minimumHeight
-                source:  existsWindowActive ? root.icon : ""
+                source: root.icon
             }
-
             PlasmaComponents.Label {
                 id: fullText
-                Layout.minimumWidth: 0
-                Layout.preferredWidth: implicitWidth
-                Layout.maximumWidth: 750
-                Layout.minimumHeight: implicitHeight
-                Layout.maximumHeight: Layout.minimumHeight
                 elide:Text.ElideRight
-                text:{
-                    if(!cfg.showTooltip) return ""
-                    else if(existsWindowActive) return Tools.substitute("<b>%a</b> - %w<p>", true)
-                    else return Tools.altSubstitute("%q")
-                }
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                verticalAlignment: Text.AlignVCenter
+                text:root.text
             }
         }
     }
