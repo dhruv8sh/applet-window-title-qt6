@@ -1,56 +1,60 @@
 # Window Title Applet
-A Plasma 6 port of the [Window Title Applet](https://github.com/psifidotos/applet-window-title/) for Latte Dock by the legendary [Psifidotos](https://github.com/psifidotos).
-> ### Requires Plasma 6
-## Mouse Gestures
-- <b>Scroll Wheel</b> : Cycle through tasks
-- <b>Double Click</b> : Maximize / Unmaximize
-- <b>Middle Button Click</b> : Close active task
+A Plasma 6 applet that builds on the work of [Psifidotos](https://github.com/psifidotos).
+
 ## Substitutions
 - <b>%a</b> : Application Name
 - <b>%w</b> : Windows Title
-## Extra Features (Added over the original applet)
-
-- [x] Show only on maximize
-- [x] Placeholder icon
-- [x] Special Substitutions
-- [x] Click to open overview
-- [x] Ability to Elide Text to Right
-- [x] Customizable font size
-- [ ] Drag to move window
-- [ ] Application menu like context menu on right-click (The menu when clicking on title bar)
+- <b>%q</b> : Activity Name
+- `<b>`..`</b>` : Selective bold
+- `<i>`..`</i>` : Selective Italics
+- `<br>`/`<p>` : New line ([Text will not be elided with multi-line text](https://bugreports.qt.io/browse/QTBUG-16567))
 
 ## Images
 <div align="center">
 <p>
-
-![Screenshot_20240309_030116](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/3be393cf-616a-4eb5-ad25-aa47f4ceb250)<br/>
+  
+![](https://github.com/user-attachments/assets/96c6d653-89a1-491b-b458-eb9aff219ea5)<br/>
 <i>Plasmoid with Firefox web browser open</i>
+<br/><br/>
+</p>
+  
+<p>
+  
+![](https://github.com/user-attachments/assets/b6383c39-38bb-424d-8f10-b3144d72b889)<br/>
+<i>Plasmoid with multi-line title</i>
 <br/><br/>
 </p>
 
 <p>
-
-![Screenshot_20240309_030208](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/52c59b33-b278-469c-9111-9ba0a0b2ae4f)<br/>
+  
+![](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/52c59b33-b278-469c-9111-9ba0a0b2ae4f)<br/>
 <i>Example of placeholder text and icon</i>
 <br/><br/>
 </p>
 
 <p>
-
-![Screenshot_20240309_025532](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/49a7fbe9-5e9f-4e75-8b05-83e0cd87f8ec)<br/>
+  
+![](https://github.com/user-attachments/assets/e79649bc-0011-4530-b482-e5cfb51e03d2)<br/>
 <i>Appearance Settings</i>
-
 <br/><br/>
 </p>
 
 <p>
+  
+![Screenshot_20240728_192316](https://github.com/user-attachments/assets/d7dd90f1-1164-4665-982b-48785185b6e8)<br/>
+<i>Behavior Settings</i>
+<br/><br/>
+</p>
 
-![Screenshot_20240309_025552](https://github.com/dhruv8sh/plasma6-window-title-applet/assets/67322047/dd3ced74-c8f5-44d3-9b3a-b886eef694e9)<br/>
-<i>Behavioral Settings</i>
+<p>
+  
+![Screenshot_20240728_192323](https://github.com/user-attachments/assets/38050897-c45d-4753-b78c-bca48ab1f13e)<br/>
+<i>Substitutions Settings</i>
 <br/><br/>
 </p>
 
 </div>
+
 
 ## Installation
 Either use "Add Widget functionality" or use ```plasmapkg2 -i ./``` when in the root directory of the applet
