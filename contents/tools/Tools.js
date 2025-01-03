@@ -7,11 +7,19 @@ function match(pat,str){
     let rgx = new RegExp(clean(pat))
     return rgx.test(str)
 }
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+}
 function sub(str){
     return str
-        .replace("%a",activeTaskItem?.appName??"")
-        .replace("%w",activeTaskItem?.title??"")
-        .replace("%q",fullActivityInfo?.name??"")
+        .replace("%a",escapeHtml(activeTaskItem?.appName??""))
+        .replace("%w",escapeHtml(activeTaskItem?.title??""))
+        .replace("%q",escapeHtml(fullActivityInfo?.name??""))
 }
 function substitute() {
     let minSize = Math.min(cfg.subsMatchApp.length, cfg.subsReplace.length,cfg.subsMatchTitle.length)
